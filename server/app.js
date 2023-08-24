@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const methodOverride = require('method-override');
 
 const authRoutes = require('./routes/auth');
+const fileRoutes = require('./routes/file');
 
 dotenv.config();
 
@@ -21,10 +22,13 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(methodOverride('_method'));
 
 app.use('/auth', authRoutes);
+app.use('/files', fileRoutes);
 
 app.listen(port, () => {
     console.log(`Server running on ${port} port.`);
