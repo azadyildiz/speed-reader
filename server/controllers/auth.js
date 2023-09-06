@@ -12,11 +12,14 @@ const registerUser = async (req, res) => {
 
         var hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await User.create({username, email, password: hashedPassword});
+        await User.create({username, email, password: hashedPassword});
 
-        res.status(201).json(user);
+        res.status(201).json({message: 'User created successfully.'});
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({
+            message: 'An error occurred while processing the file.',
+            error: error
+        });
     }
 };
 
@@ -40,11 +43,37 @@ const loginUser = async (req, res) => {
 
         res.status(200).json({token});
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({
+            message: 'An error occurred while processing the file.',
+            error: error
+        });
     }
 };
 
+const updateUserSub = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.userId);
+        const {isSubscriber} = req.body;
+
+        if(!user){
+            return res.status(401).json({message: 'Invalid token. Cannot found this user.'});
+        }
+
+        user.isSubscriber = isSubscriber;
+        await user.save();
+
+        res.status(200).json({message: 'User updated successfully.'})
+    } catch (error) {
+        res.status(500).json({
+            message: 'An error occurred while processing the file.',
+            error: error
+        });
+    }
+
+}
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    updateUserSub
 };
