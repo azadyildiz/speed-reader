@@ -100,6 +100,7 @@ const getFiles = async (req, res) => {
         const fileObj = await File.findById(file);
         responseArr.push({
             fileName: fileObj.fileName,
+            wordIndex: fileObj.wordIndex,
             fileWordsLength: fileObj.fileWords.length
         });
         }
