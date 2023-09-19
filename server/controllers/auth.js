@@ -16,10 +16,15 @@ const registerUser = async (req, res) => {
 
         res.status(201).json({message: 'User created successfully.'});
     } catch (error) {
-        res.status(500).json({
-            message: 'An error occurred while processing the file.',
-            error: error
-        });
+        if (error.code === 11000 && error.keyPattern.email === 1) {
+            return res.status(400).json({ message: 'You have already registered with this email.' });
+        }
+        else {
+            res.status(500).json({
+                message: 'An error occurred while processing the file.',
+                error: error
+            });
+        }
     }
 };
 
