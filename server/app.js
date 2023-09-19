@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const methodOverride = require('method-override');
 
 const authRoutes = require('./routes/auth');
@@ -26,6 +27,11 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(methodOverride('_method'));
+
+app.use(cors());
+app.options('*', cors());
+
+
 
 app.use('/auth', authRoutes);
 app.use('/files', fileRoutes);
