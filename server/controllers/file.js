@@ -34,6 +34,7 @@ const getFile = async (req, res) => {
         var partOfFileWords = await file.partOfFileWords;
 
         res.status(200).json({
+            id: file._id,
             fileName: file.fileName,
             wordIndex: file.wordIndex,
             wordsPerMinute: file.wordsPerMinute,
@@ -161,6 +162,7 @@ const getFiles = async (req, res) => {
         for (const file of owner.files) {
         const fileObj = await File.findById(file);
         responseArr.push({
+            id: fileObj._id,
             fileName: fileObj.fileName,
             wordIndex: fileObj.wordIndex,
             fileWordsLength: fileObj.fileWords.length
