@@ -88,7 +88,7 @@ const updateFile = async (req, res) => {
         const file = await File.findById(req.params.fileId);
         const owner = await User.findById(req.user.userId);
 
-        const {fileName, wordIndex, wordsPerMinute} = req.body;
+        const {wordIndex, wordsPerMinute} = req.body;
     
         if(!file){
             return res.status(404).json({message: 'Invalid file id. Cannot found this file.'});
@@ -102,7 +102,7 @@ const updateFile = async (req, res) => {
             return res.status(401).json({message: 'Invalid owner. Cannot access this file.'});
         }
 
-        file.set({fileName, wordIndex, wordsPerMinute});
+        file.set({wordIndex, wordsPerMinute});
 
         await file.save();
 

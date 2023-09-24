@@ -4,15 +4,15 @@ const User = require('../models/User');
 
 const registerUser = async (req, res) => {
     try {
-        const {username, email, password} = req.body;
+        const {email, password} = req.body;
 
         if(password.length < 6){
             return res.status(422).json({error: 'Password length must be at least 6.'})
         }
 
         var hashedPassword = await bcrypt.hash(password, 10);
-
-        await User.create({username, email, password: hashedPassword});
+        // TODO: CHANGE DEFAULT TRUE
+        await User.create({email, password: hashedPassword, isSubscriber: true});
 
         res.status(201).json({message: 'User created successfully.'});
     } catch (error) {
