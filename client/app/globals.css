@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.button-dark {
+  @apply text-white bg-dark-color text-sm sm:text-base font-semibold leading-6 hover:opacity-80 transition-opacity duration-200 px-3 py-2 sm:px-4 sm:py-2 rounded;
+}
+
+@layer utilities {
+  .button-light {
+    @apply text-dark-color bg-white text-base font-semibold leading-6 hover:opacity-80 transition-opacity duration-200 px-4 py-2 rounded;
+  }
+}
+
+.text-input {
+  @apply text-base px-3 py-2 mt-2 block w-full rounded-md border-0 text-dark-color leading-6 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-dark-color;
+}
+
+.calculated-website-height {
+  min-height: calc(100vh - 381px);
+}
+
+.calculated-app-height {
+  min-height: calc(100vh - 88px);
+}
+
+.hover-effect {
+  @apply hover:opacity-80 transition-opacity duration-200;
+}
+
+h1 {
+  @apply text-4xl font-bold tracking-tight md:text-6xl;
+}
+
+h2 {
+  @apply text-2xl font-bold tracking-tight md:text-3xl;
+}
+
+h3 {
+  @apply text-xl font-bold tracking-tight md:text-2xl;
+}
+
+h4 {
+  @apply text-lg font-bold tracking-tight md:text-xl;
+}
+
+.loader {
+  border-top-color: #ff5400;
+  -webkit-animation: spinner 1.5s linear infinite;
+  animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
